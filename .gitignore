@@ -259,3 +259,6 @@ autom4te.cache/
 config.log
 config.status
 mk/buildsys.mk
+
+# Nix stuff
+.direnv
