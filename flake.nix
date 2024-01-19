@@ -23,6 +23,7 @@
             pkgs.clang-tools_17
             pkgs.llvmPackages_17.clangUseLLVM
             pkgs.mold
+            pkgs.ncurses6
             pkgs.lldb_17
           ];
         });
