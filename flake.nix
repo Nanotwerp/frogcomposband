@@ -18,6 +18,8 @@
       devShell = forAllSystems ({ system, pkgs }:
         pkgs.mkShell {
           packages = [
+            pkgs.autoconf
+            pkgs.automake
             pkgs.clang-tools_17
             pkgs.llvmPackages_17.clangUseLLVM
             pkgs.mold
