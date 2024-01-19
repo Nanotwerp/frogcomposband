@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(FrogComposband, 7.1.salmiak, http://angband.oook.cz)
+AC_INIT([FrogComposband],[7.1.salmiak],[http://angband.oook.cz])
 AC_CONFIG_SRCDIR(src)
 
 AC_CANONICAL_HOST
@@ -80,7 +80,19 @@ AC_HEADER_DIRENT
 AC_CHECK_HEADERS([fcntl.h stdint.h])
 AC_HEADER_STDBOOL
 AC_C_CONST
-AC_TYPE_SIGNAL
+m4_warn([obsolete],
+[your code may safely assume C89 semantics that RETSIGTYPE is void.
+Remove this warning and the `AC_CACHE_CHECK' when you adjust the code.])dnl
+AC_CACHE_CHECK([return type of signal handlers],[ac_cv_type_signal],[AC_COMPILE_IFELSE(
+[AC_LANG_PROGRAM([#include <sys/types.h>
+#include <signal.h>
+],
+		 [return *(signal (0, 0)) (0) == 1;])],
+		   [ac_cv_type_signal=int],
+		   [ac_cv_type_signal=void])])
+AC_DEFINE_UNQUOTED([RETSIGTYPE],[$ac_cv_type_signal],[Define as the return type of signal handlers
+		    (`int' or `void').])
+
 AC_CHECK_FUNCS([mkdir setresgid setegid stat mkstemp usleep])
 
 dnl needed because h-basic.h checks for this define for autoconf support.
